@@ -1,0 +1,10 @@
+syntax = "proto3";
+package com.xabe.car;
+
+option java_package = "com.xabe.car.api.grpc.getcar";
+
+message GetCarRequest {
+
+  string id = 1;
+
+}

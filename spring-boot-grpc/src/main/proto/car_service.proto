@@ -1,0 +1,29 @@
+syntax = "proto3";
+package com.xabe;
+
+import "getcar/get_car_request.proto";
+import "getcar/get_car_response.proto";
+import "searchcar/search_car_request.proto";
+import "searchcar/search_car_response.proto";
+import "uploadcar/upload_car_image_request.proto";
+import "uploadcar/upload_car_image_response.proto";
+
+option java_package = "com.xabe.car.api.grpc";
+
+service CarEndPoint {
+
+  rpc GetCar(com.xabe.car.GetCarRequest)
+    returns (com.xabe.car.GetCarResponse)
+  {
+  }
+
+  rpc SearchCar(com.xabe.car.SearchCarRequest)
+    returns (stream com.xabe.car.SearchCarResponse)
+  {
+  }
+
+  rpc UploadCarImage(stream com.xabe.car.UploadCarImageRequest)
+    returns (com.xabe.car.UploadCarImageResponse)
+  {
+  }
+}

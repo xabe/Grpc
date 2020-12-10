@@ -1,0 +1,13 @@
+syntax = "proto3";
+package com.xabe;
+
+option java_package = "com.xabe.grpc.exception";
+
+/**
+ * Represents a problem details object
+ */
+message ProblemDetails {
+  int32 code = 1; // Code of the service exception
+  string title = 2; // Human readable exception title
+  string detail = 3; // Detail of the exception title
+}

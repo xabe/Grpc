@@ -1,0 +1,12 @@
+syntax = "proto3";
+package com.xabe.car;
+
+option java_package = "com.xabe.car.api.grpc.getnavigatecar";
+
+message GetNavigateCarRequest {
+
+  string id = 1;
+
+  int32 distance_travelled = 2;
+
+}

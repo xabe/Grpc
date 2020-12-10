@@ -1,0 +1,18 @@
+syntax = "proto3";
+package com.xabe.car;
+
+import "google/protobuf/wrappers.proto";
+
+option java_package = "com.xabe.car.api.grpc.uploadcar";
+
+message UploadCarImageResponse {
+
+  string id = 1;
+
+  string model = 2;
+
+  string brand = 3;
+
+  google.protobuf.Int32Value size = 4;
+
+}

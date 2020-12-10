@@ -1,0 +1,21 @@
+syntax = "proto3";
+package com.xabe.car;
+
+option java_package = "com.xabe.car.api.grpc.uploadcar";
+
+message UploadCarImageRequest {
+
+  message CarInfo {
+    string id = 1;
+  }
+
+  message CarData {
+    bytes chunk_data = 1;
+  }
+
+  oneof data {
+    CarInfo car_info = 1;
+    CarData car_data = 2;
+  };
+
+}

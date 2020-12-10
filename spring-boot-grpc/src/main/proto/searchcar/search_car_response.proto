@@ -1,0 +1,14 @@
+syntax = "proto3";
+package com.xabe.car;
+
+option java_package = "com.xabe.car.api.grpc.searchcar";
+
+message SearchCarResponse {
+
+  string id = 1;
+
+  string model = 2;
+
+  string brand = 3;
+
+}

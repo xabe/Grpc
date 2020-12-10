@@ -1,0 +1,16 @@
+syntax = "proto3";
+package com.xabe.car;
+
+option java_package = "com.xabe.car.api.grpc.getnavigatecar";
+
+message GetNavigateCarResponse {
+
+  string id = 1;
+
+  string name = 2;
+
+  int32 remaining_distance = 3;
+
+  int32 time_to_destination = 4;
+
+}

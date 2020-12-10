@@ -1,0 +1,39 @@
+# Configuration file
+# key = value
+
+quarkus:
+  grpc:
+    server:
+      enable-reflection-service: true
+      port: 6565
+  native:
+    additional-build-args:
+      - "-H:+TraceClassInitialization"
+      - "-H:+PrintClassInitialization"
+      - "-H:+ReportExceptionStackTraces"
+      - "-H:GenerateDebugInfo=1"
+      - "-H:+StackTrace"
+  package:
+    main-class: com.xabe.quarkus.grpc.App
+  log:
+    console:
+      enable: true
+      level: DEBUG
+    category:
+      com.xabe.quarkus:
+        level: DEBUG
+      io.quarkus:
+        level: INFO
+      io.quarkus.grpc:
+        level: DEBUG
+      io.grpc:
+        level: INFO
+
+  application:
+    name: quarkus-grpc
+  banner:
+    enabled: false
+  http:
+    test-port: 8009
+    port: 8009
+    root-path: /api

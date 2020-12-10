@@ -1,0 +1,18 @@
+server:
+  servlet:
+    context-path: /
+  port: 7080
+grpc:
+  server:
+    port: 6565
+logging:
+  level:
+    root: INFO
+    io.grpc: INFO
+    com.xabe.spring.grpc: DEBUG
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: consumer

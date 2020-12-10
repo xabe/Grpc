@@ -1,0 +1,22 @@
+syntax = "proto3";
+package com.xabe;
+
+import "getcar/get_car_request.proto";
+import "getcar/get_car_response.proto";
+import "getnavigatecar/get_navigate_car_request.proto";
+import "getnavigatecar/get_navigate_car_response.proto";
+
+option java_package = "com.xabe.car.api.grpc";
+
+service CarEndPoint {
+
+  rpc GetCar(com.xabe.car.GetCarRequest)
+    returns (com.xabe.car.GetCarResponse)
+  {
+  }
+
+  rpc GetNavigateCar(stream com.xabe.car.GetNavigateCarRequest)
+    returns (stream com.xabe.car.GetNavigateCarResponse)
+  {
+  }
+}
