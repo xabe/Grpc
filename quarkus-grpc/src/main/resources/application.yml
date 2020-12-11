@@ -4,6 +4,7 @@
 quarkus:
   grpc:
     server:
+      instances: 10
       enable-reflection-service: true
       port: 6565
   native:
