@@ -2,6 +2,8 @@
 # key = value
 
 quarkus:
+  vertx:
+    prefer-native-transport: true
   grpc:
     server:
       instances: 10
@@ -29,12 +31,15 @@ quarkus:
         level: DEBUG
       io.grpc:
         level: INFO
+      io.quarkus.vertx:
+        level: DEBUG
 
   application:
     name: quarkus-grpc
   banner:
     enabled: false
   http:
+    so-reuse-port: true
     test-port: 8009
     port: 8009
     root-path: /api

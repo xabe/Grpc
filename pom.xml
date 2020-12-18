@@ -28,6 +28,10 @@
     <skipTests>false</skipTests>
     <skipITs>${skipTests}</skipITs>
     <skipUTs>${skipTests}</skipUTs>
+    <jacoco.version>0.8.6</jacoco.version>
+    <jacoco.haltOnFailure>false</jacoco.haltOnFailure>
+    <jacoco.line.coveredRatio>0.85</jacoco.line.coveredRatio>
+    <jacoco.branch.coveredRatio>0.85</jacoco.branch.coveredRatio>
   </properties>
 
   <dependencies>

@@ -19,6 +19,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+*.exec
 
 # External tool builders
 .externalToolBuilders/

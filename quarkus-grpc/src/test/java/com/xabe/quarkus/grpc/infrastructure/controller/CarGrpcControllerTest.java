@@ -13,9 +13,11 @@ import io.grpc.stub.StreamObserver;
 import io.quarkus.test.junit.QuarkusTest;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
+@Tag("integration")
 class CarGrpcControllerTest {
 
   @Test
