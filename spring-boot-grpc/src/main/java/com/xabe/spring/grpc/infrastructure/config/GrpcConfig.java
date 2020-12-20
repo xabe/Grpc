@@ -1,14 +1,21 @@
 package com.xabe.spring.grpc.infrastructure.config;
 
 import com.google.common.util.concurrent.UncaughtExceptionHandlers;
+import com.xabe.spring.grpc.infrastructure.config.conditional.LinuxConditional;
+import com.xabe.spring.grpc.infrastructure.config.conditional.MacOxConditional;
+import com.xabe.spring.grpc.infrastructure.config.conditional.WindowsConditional;
 import io.grpc.netty.NettyChannelBuilder;
 import io.grpc.netty.NettyServerBuilder;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.ServerChannel;
 import io.netty.channel.epoll.Epoll;
+import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.kqueue.KQueue;
 import io.netty.channel.kqueue.KQueueEventLoopGroup;
 import io.netty.channel.kqueue.KQueueServerSocketChannel;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.NettyRuntime;
 import io.netty.util.concurrent.DefaultThreadFactory;
 import java.util.concurrent.Executor;
@@ -20,6 +27,7 @@ import net.devh.boot.grpc.server.serverfactory.GrpcServerConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -48,13 +56,12 @@ public class GrpcConfig {
         .channelType(EpollServerSocketChannel.class);
   }*/
 
-  /*@Bean
+  @Bean
+  @Conditional(WindowsConditional.class)
   GrpcServerConfigurer grpcServerConfigurerNettyShaded() {
     return builder -> {
+      this.LOG.info("System supports native nio netty transport");
       final ThreadFactory tf = new DefaultThreadFactory("server-elg-", true);
-      // On Linux it can, possibly, be improved by using
-      // io.netty.channel.epoll.EpollEventLoopGroup
-      // io.netty.channel.epoll.EpollServerSocketChannel
       final EventLoopGroup boss = new NioEventLoopGroup(1, tf);
       final EventLoopGroup worker = new NioEventLoopGroup(0, tf);
       final Class<? extends ServerChannel> channelType = NioServerSocketChannel.class;
@@ -65,16 +72,20 @@ public class GrpcConfig {
           .flowControlWindow(NettyChannelBuilder.DEFAULT_FLOW_CONTROL_WINDOW)
           .executor(getAsyncExecutor());
     };
-  }*/
+  }
 
-  /*@Bean
+  @Bean
+  @Conditional(LinuxConditional.class)
   GrpcServerConfigurer grpcServerConfigurerLinux() {
     return builder -> {
-        if (this.EPOLL_IS_AVAILABLE) {
-      this.LOG.info("System supports native epoll netty transport");
-    } else {
-      this.LOG.info("System does not support native epoll netty transport");
-    }
+      if (this.EPOLL_IS_AVAILABLE) {
+        this.LOG.info("System supports native epoll netty transport");
+      } else {
+        this.LOG.info("System does not support native epoll netty transport");
+      }
+      // On Linux it can, possibly, be improved by using
+      // io.netty.channel.epoll.EpollEventLoopGroup
+      // io.netty.channel.epoll.EpollServerSocketChannel
       final ThreadFactory tf = new DefaultThreadFactory("server-elg-", true);
       final EventLoopGroup boss = new EpollEventLoopGroup(1, tf);
       final EventLoopGroup worker = new EpollEventLoopGroup(0, tf);
@@ -86,9 +97,10 @@ public class GrpcConfig {
           .flowControlWindow(NettyChannelBuilder.DEFAULT_FLOW_CONTROL_WINDOW)
           .executor(getAsyncExecutor());
     };
-  }*/
+  }
 
   @Bean
+  @Conditional(MacOxConditional.class)
   GrpcServerConfigurer grpcServerConfigurerOsx() {
     if (this.KQUEUE_IS_AVAILABLE) {
       this.LOG.info("System supports native kqueue netty transport");
