@@ -12,7 +12,7 @@
   <artifactId>spring-boot-grpc</artifactId>
 
   <properties>
-    <springframework.boot.version>2.3.5.RELEASE</springframework.boot.version>
+    <springframework.boot.version>2.4.2</springframework.boot.version>
     <jacoco.argline.ut>
       -javaagent:${settings.localRepository}${file.separator}org${file.separator}jacoco${file.separator}org.jacoco.agent${file.separator}${jacoco.version}${file.separator}org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}${file.separator}coverage-reports${file.separator}jacoco-ut.exec
     </jacoco.argline.ut>
