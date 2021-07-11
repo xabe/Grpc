@@ -6,12 +6,13 @@ quarkus:
     prefer-native-transport: true
   grpc:
     server:
-      instances: 10
-      enable-reflection-service: true
+      host: 0.0.0.0
+      test-port: 6566
       port: 6565
+      instances: 2
+      enable-reflection-service: true
   native:
     additional-build-args:
-      - "-H:+TraceClassInitialization"
       - "-H:+PrintClassInitialization"
       - "-H:+ReportExceptionStackTraces"
       - "-H:GenerateDebugInfo=1"

@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /
+  port: 7080
+grpc:
+  server:
+    port: 6566

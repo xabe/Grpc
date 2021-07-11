@@ -16,7 +16,7 @@ public class GrpcUtil {
 
   private GrpcUtil() {
     try {
-      final ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("0.0.0.0", 6565).usePlaintext().build();
+      final ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("0.0.0.0", 6566).usePlaintext().build();
       this.carEndPointBlockingStub = CarEndPointGrpc.newBlockingStub(managedChannel);
       this.carEndPointStub = CarEndPointGrpc.newStub(managedChannel);
     } catch (final Exception e) {

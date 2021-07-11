@@ -81,6 +81,7 @@
           <source>${java.version}</source>
           <target>${java.version}</target>
           <showDeprecation>true</showDeprecation>
+          <parameters>${maven.compiler.parameters}</parameters>
           <annotationProcessorPaths>
             <path>
               <groupId>org.mapstruct</groupId>

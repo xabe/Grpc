@@ -9,10 +9,10 @@ import com.xabe.quarkus.grpc.domain.entity.CarDO;
 import com.xabe.quarkus.grpc.infrastructure.application.CarUseCase;
 import com.xabe.quarkus.grpc.infrastructure.controller.mapper.CarGrpcMapper;
 import io.grpc.stub.StreamObserver;
+import io.quarkus.grpc.GrpcService;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
+@GrpcService
 public class CarGrpcController extends CarEndPointImplBase {
 
   @Inject
