@@ -13,6 +13,8 @@ import io.grpc.stub.StreamObserver;
 import io.quarkus.test.junit.QuarkusTest;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +22,23 @@ import org.junit.jupiter.api.Test;
 @Tag("integration")
 class CarGrpcControllerTest {
 
+  private static GrpcUtil grpcUtil;
+
+  @BeforeAll
+  public static void init() {
+    grpcUtil = new GrpcUtil();
+  }
+
+  @AfterAll
+  public static void cleanup() throws InterruptedException {
+    grpcUtil.shutdown();
+  }
+
   @Test
   public void givenACarIDWhenInvokeGetCarThenReturnCar() throws Exception {
     final GetCarRequest getCarRequest = GetCarRequest.newBuilder().setId("1").build();
 
-    final GetCarResponse result = GrpcUtil.instance().getCarEndPointBlockingStub().getCar(getCarRequest);
+    final GetCarResponse result = grpcUtil.getCarEndPointBlockingStub().getCar(getCarRequest);
 
     assertThat(result, is(notNullValue()));
     assertThat(result.getId(), is("1"));
@@ -36,7 +50,7 @@ class CarGrpcControllerTest {
     final GetCarRequest getCarRequest = GetCarRequest.newBuilder().setId("not").build();
 
     try {
-      GrpcUtil.instance().getCarEndPointBlockingStub().getCar(getCarRequest);
+      grpcUtil.getCarEndPointBlockingStub().getCar(getCarRequest);
     } catch (final StatusRuntimeException e) {
       assertThat(e, is(notNullValue()));
       assertThat(e.getStatus().getCode(), is(Status.NOT_FOUND.getCode()));
@@ -47,7 +61,7 @@ class CarGrpcControllerTest {
   @Test
   public void givenACarIdWhenInvokeGetNavigateCarThenReturnStream() throws Exception {
     final GetNavigateResponseStreamObserver streamObserver = new GetNavigateResponseStreamObserver("1");
-    final StreamObserver<GetNavigateCarRequest> request = GrpcUtil.instance().getCarEndPointStub().getNavigateCar(streamObserver);
+    final StreamObserver<GetNavigateCarRequest> request = grpcUtil.getCarEndPointStub().getNavigateCar(streamObserver);
     final CompletableFuture<Object> completableFuture = streamObserver.startTrip(request);
 
     final Object result = completableFuture.get(30, TimeUnit.SECONDS);
@@ -60,7 +74,7 @@ class CarGrpcControllerTest {
     final GetNavigateResponseStreamObserver streamObserver = new GetNavigateResponseStreamObserver("not");
 
     try {
-      final StreamObserver<GetNavigateCarRequest> request = GrpcUtil.instance().getCarEndPointStub().getNavigateCar(streamObserver);
+      final StreamObserver<GetNavigateCarRequest> request = grpcUtil.getCarEndPointStub().getNavigateCar(streamObserver);
       streamObserver.startTrip(request);
     } catch (final StatusRuntimeException e) {
       assertThat(e, is(notNullValue()));

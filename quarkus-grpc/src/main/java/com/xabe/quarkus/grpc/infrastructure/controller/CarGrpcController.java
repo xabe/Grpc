@@ -10,19 +10,13 @@ import com.xabe.quarkus.grpc.infrastructure.application.CarUseCase;
 import com.xabe.quarkus.grpc.infrastructure.controller.mapper.CarGrpcMapper;
 import io.grpc.stub.StreamObserver;
 import io.quarkus.grpc.GrpcService;
-import javax.inject.Inject;
 
 @GrpcService
 public class CarGrpcController extends CarEndPointImplBase {
 
-  @Inject
-  CarUseCase carUseCase;
+  private final CarUseCase carUseCase;
 
-  @Inject
-  CarGrpcMapper carGrpcMapper;
-
-  public CarGrpcController() {
-  }
+  private final CarGrpcMapper carGrpcMapper;
 
   CarGrpcController(final CarUseCase carUseCase, final CarGrpcMapper carGrpcMapper) {
     this.carUseCase = carUseCase;

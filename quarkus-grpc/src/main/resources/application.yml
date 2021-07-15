@@ -1,15 +1,15 @@
-# Configuration file
-# key = value
-
 quarkus:
+  test:
+    native-image-profile: test
+    native-image-wait-time: 300
   vertx:
     prefer-native-transport: true
   grpc:
     server:
       host: 0.0.0.0
       test-port: 6566
-      port: 6565
-      instances: 2
+      port: 6566
+      instances: 1
       enable-reflection-service: true
   native:
     additional-build-args:
@@ -44,3 +44,5 @@ quarkus:
     test-port: 8009
     port: 8009
     root-path: /api
+  ssl:
+    native: false

@@ -4,16 +4,11 @@ import com.xabe.quarkus.grpc.domain.entity.CarDO;
 import com.xabe.quarkus.grpc.domain.exception.NotFoundException;
 import com.xabe.quarkus.grpc.domain.repository.CarRepository;
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 @ApplicationScoped
 public class CarUseCaseImpl implements CarUseCase {
 
-  @Inject
-  CarRepository carRepository;
-
-  public CarUseCaseImpl() {
-  }
+  private final CarRepository carRepository;
 
   CarUseCaseImpl(final CarRepository carRepository) {
     this.carRepository = carRepository;
