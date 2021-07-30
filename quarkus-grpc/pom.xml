@@ -14,8 +14,8 @@
   <properties>
     <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.0.2.Final</quarkus.platform.version>
-    <quarkus-plugin.version>2.0.2.Final</quarkus-plugin.version>
+    <quarkus.platform.version>2.1.0.Final</quarkus.platform.version>
+    <quarkus-plugin.version>2.1.0.Final</quarkus-plugin.version>
     <quarkus.generate-code.grpc.scan-for-imports>all</quarkus.generate-code.grpc.scan-for-imports>
   </properties>
 
